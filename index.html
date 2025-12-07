@@ -3,86 +3,354 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>صفحة Ahmed 💻 developer PHP - مطور ويب</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <title>محفظة أعمال (Portfolio) - أحمد السيد (مطور PHP)</title>
+    
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <style>
+        /* ================= 1. التنسيق العام والأساسيات ================= */
+        :root {
+            --primary-color: #007bff; /* أزرق أساسي (للأزرار والتركيز) */
+            --secondary-color: #f8f9fa; /* رمادي فاتح (لخلفية الأقسام) */
+            --text-dark: #212529; /* لون النص الرئيسي */
+            --text-light: #6c757d; /* لون النص الثانوي */
+            --danger-color: #dc3545; /* لون جديد للأزرار الثانوية */
+        }
+
+        body {
+            font-family: 'Cairo', sans-serif;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: white;
+            text-align: right;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px 0;
+        }
+
+        section {
+            padding: 80px 0;
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: var(--primary-color);
+            text-align: center;
+        }
+
+        /* زر أساسي مريح */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 12px 25px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background-color 0.3s, transform 0.2s;
+            border: none;
+            cursor: pointer;
+            margin: 5px 10px;
+        }
+
+        .btn i {
+            margin-left: 8px;
+            font-size: 1.1rem;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: white;
+            box-shadow: 0 4px 10px rgba(0, 123, 255, 0.3);
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            color: var(--primary-color);
+            border: 2px solid var(--primary-color);
+        }
+        
+        .btn-secondary:hover {
+            background-color: var(--primary-color);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* ================= 2. قسم المقدمة (Hero) ================= */
+        #hero {
+            background-color: var(--secondary-color);
+            padding: 100px 0;
+            text-align: center;
+        }
+
+        .hero-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .profile-image {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 25px;
+            border: 5px solid var(--primary-color);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        #hero h1 {
+            font-size: 3rem;
+            color: var(--text-dark);
+            margin-bottom: 10px;
+        }
+
+        #hero p {
+            font-size: 1.2rem;
+            color: var(--text-light);
+            max-width: 800px;
+            margin-bottom: 30px;
+        }
+
+        /* ================= 3. قسم المشاريع (Projects) ================= */
+        #projects {
+            background-color: white;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .project-card {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            transition: box-shadow 0.3s;
+        }
+
+        .project-card:hover {
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .project-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .project-info {
+            padding: 20px;
+        }
+
+        .project-info h3 {
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+
+        .tags span {
+            display: inline-block;
+            background-color: var(--secondary-color);
+            color: var(--text-dark);
+            padding: 5px 10px;
+            border-radius: 3px;
+            font-size: 0.8rem;
+            margin-left: 8px;
+            margin-top: 10px;
+        }
+        
+        /* زر عرض حي بداخل كروت المشاريع */
+        .project-info .btn-primary {
+            width: 100%;
+            margin: 15px 0 0 0;
+            padding: 10px 0;
+        }
+
+        /* ================= 4. قسم التواصل (Contact) ================= */
+        #contact {
+            background-color: var(--secondary-color);
+            text-align: center;
+        }
+
+        .contact-info p {
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+            color: var(--text-dark);
+            font-weight: 500;
+        }
+
+        .social-links a {
+            font-size: 1.8rem;
+            color: var(--primary-color);
+            margin: 0 15px;
+            transition: color 0.3s;
+        }
+
+        .social-links a:hover {
+            color: #004080;
+        }
+
+        /* ================= 5. الفوتر (Footer) ================= */
+        footer {
+            background-color: var(--text-dark);
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+            font-size: 0.9rem;
+        }
+
+        /* ================= 6. استجابة الأجهزة الصغيرة (Media Queries) ================= */
+        @media (max-width: 768px) {
+            #hero h1 {
+                font-size: 2.2rem;
+            }
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+            .buttons {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+            .btn {
+                width: 80%;
+                margin: 5px auto;
+            }
+        }
+    </style>
 </head>
 <body>
-    <header class="hero">
-        <div class="container">
-           <img src="Ahmed.jpg" alt="صورة شخصية للمطور أحمد" class="profile-pic">
-            <h1>مرحباً، أنا Ahmed </h1>
-            <p class="tagline">مطور ويب مبتدئ ومتحمس لإنشاء تجارب رقمية رائعة.</p>
-            <div class="social-links">
-                <a href="#" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin fa-2x"></i></a>
-                <a href="#" target="_blank" aria-label="GitHub"><i class="fab fa-github fa-2x"></i></a>
-                <a href="#" target="_blank" aria-label="Twitter"><i class="fab fa-twitter fa-2x"></i></a>
+
+    <nav class="container">
+        <a href="#hero" style="font-size: 1.5rem; color: var(--primary-color); text-decoration: none;">أحمد السيد</a>
+        <div style="float: left;">
+            <a href="#projects" class="btn btn-secondary" style="margin-left: 10px; padding: 8px 15px;">المشاريع</a>
+            <a href="#contact" class="btn btn-primary" style="padding: 8px 15px;">اتصل بي</a>
+        </div>
+        <div style="clear: both;"></div>
+    </nav>
+
+    <section id="hero">
+        <div class="container hero-content">
+            <img src="Ahmed.jpg" alt="صورة الملف الشخصي لأحمد السيد" class="profile-image">
+            
+            <h1>أهلاً بك، أنا أحمد السيد</h1>
+            <p>
+                <strong>مطور PHP  (Developer)</strong>. متخصص في بناء المواقع والمتاجر الإلكترونية وحلول الأرشفة المخصصة. أحول الأفكار إلى منصات رقمية آمنة وذات أداء عالٍ.
+            </p>
+            
+            <div class="buttons">
+                <a href="#projects" class="btn btn-primary">
+                    <i class="fas fa-desktop"></i> شاهد أعمالي 
+                </a>
+                
+                <a href="Landing-Page.html" class="btn btn-secondary">
+                    <i class="fas fa-bullhorn"></i> عرض صفحة الهبوط
+                </a>
+                
+                <a href="cv.html" class="btn btn-secondary" style="border-color: var(--danger-color); color: var(--danger-color);">
+    <i class="fas fa-file-alt"></i> عرض السيرة الذاتية
+</a>
             </div>
         </div>
-    </header>
-
-    <section id="about" class="about-me">
-        <div class="container">
-            <h2>نبذة عني</h2>
-            <p>أنا احمد السيد, مطور ويب طموح، لدي شغف ببناء واجهات مستخدم جذابة وفعالة. أتمتع بخلفية قوية في أساسيات تطوير الويب وأبحث دائمًا عن فرص لتطبيق مهاراتي في مشاريع حقيقية وتعلم تقنيات جديدة.</p>
-            <p>أؤمن بأن أفضل الحلول تأتي من خلال العمل الجاد والتجريب المستمر. متحمس للانضمام إلى فريق عمل حيث يمكنني المساهمة والنمو.</p>
-        </div>
     </section>
 
-    <section id="skills" class="skills">
+    <section id="projects">
         <div class="container">
-            <h2>مهاراتي</h2>
-            <div class="skills-grid">
-                <span class="skill-tag">HTML5</span>
-                <span class="skill-tag">CSS3</span>
-                <span class="skill-tag">JavaScript</span>
-                <span class="skill-tag">React (مبتدئ)</span>
-                <span class="skill-tag">Git & GitHub</span>
-                <span class="skill-tag">تصميم متجاوب (Responsive Design)</span>
-                <span class="skill-tag">UI/UX Basics</span>
+            <h2>أبرز المشاريع</h2>
+            
+            <div class="projects-grid">
+                
+                <div class="project-card">
+                    <img src="Screenshot 2025-12-07 153344.png" alt="تطبيق إدارة المهام" class="project-image">
+                    <div class="project-info">
+                        <h3>تطبيق إدارة المهام</h3>
+                        <p>تطبيق ويب متكامل لإدارة المهام اليومية، مبني على PHP مع قاعدة بيانات MySQL.</p>
+                        <div class="tags">
+                            <span>PHP/Laravel</span>
+                            <span>MySQL</span>
+                            <span>Bootstrap</span>
+                        </div>
+                        <a href="task_manager_details.html" class="btn btn-primary">عرض التفاصيل <i class="fas fa-arrow-left"></i></a>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <img src="Screenshot 2025-12-07 153942.png" class="project-image">
+                    <div class="project-info">
+                        <h3>حلول المتاجر الإلكترونية</h3>
+                        <p>تطوير واجهة متجر إلكتروني متجاوبة وآمنة، مع أنظمة دفع وشحن متكاملة.</p>
+                        <div class="tags">
+                            <span>WooCommerce</span>
+                            <span>PHP Customization</span>
+                            <span>Responsive</span>
+                        </div>
+                        <a href="ecommerce_details.html" class="btn btn-primary">عرض التفاصيل <i class="fas fa-arrow-left"></i></a>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <img src="Screenshot 2025-12-07 154509.png" alt="نظام أرشفة وتوثيق رقمي" class="project-image">
+                    <div class="project-info">
+                        <h3>نظام أرشفة وتوثيق رقمي</h3>
+                        <p>بناء نظام مخصص لتنظيم وتخزين واسترجاع ملايين المستندات بكفاءة عالية (آرشيفات).</p>
+                        <div class="tags">
+                            <span>PHP/CodeIgniter</span>
+                            <span>Security</span>
+                            <span>Data Indexing</span>
+                        </div>
+                        <a href="archive_details.html" class="btn btn-primary">عرض التفاصيل <i class="fas fa-arrow-left"></i></a>
+                    </div>
+                </div>
+                
             </div>
         </div>
     </section>
 
-    <section id="projects" class="projects">
+    <section id="contact">
         <div class="container">
-            <h2>مشاريعي</h2>
-            <div class="project-grid">
-                <div class="project-card">
-                    <h3>مشروع 1: موقع شركة وهمية</h3>
-                    <p>موقع تعريفي لشركة صغيرة، يستخدم HTML و CSS مع تصميم متجاوب ليعمل على جميع الأجهزة.</p>
-                    <a href="#" target="_blank" class="btn">عرض المشروع</a>
-                </div>
-                <div class="project-card">
-                    <h3>مشروع 2: تطبيق قائمة مهام بسيط</h3>
-                    <p>تطبيق ويب بسيط لإدارة المهام اليومية، مبني باستخدام JavaScript النقي.</p>
-                    <a href="#" target="_blank" class="btn">عرض المشروع</a>
-                </div>
-                </div>
-        </div>
-    </section>
+            <h2>دعنا نتحدث!</h2>
+            <p style="max-width: 600px; margin: 0 auto 30px; font-size: 1.1rem;">
+                إذا كان لديك مشروع مثير للاهتمام أو ترغب في العمل معي، فلا تتردد في التواصل. سأكون سعيدًا بالرد عليك.
+            </p>
+            
+            <div class="contact-info">
+                <p><i class="fas fa-envelope" style="margin-left: 10px; color: var(--primary-color);"></i> WOLV.X.BESO@GMAIL.COM</p>
+                <p><i class="fas fa-phone" style="margin-left: 10px; color: var(--primary-color);"></i>01102151559</p>
+            </div>
 
-    <section id="contact" class="contact">
-        <div class="container">
-            <h2>تواصل معي</h2>
-            <p>أحب التواصل مع الآخرين وتبادل الأفكار. لا تتردد في التواصل معي لأي استفسارات أو فرص عمل.</p>
-            <ul>
-                <li><i class="fas fa-envelope"></i> البريد الإلكتروني: <a href="mailto:wolv.x.beso@gmail.com">wolv.x.beso@gmail.com</a></li>
-               <!--  <li><i class="fab fa-linkedin"></i> لينكد إن: <a href="#" target="_blank">linkedin.com/in/[اسم المستخدم]</a></li>-->
-                <li><i class="fab fa-github"></i> جيت هاب: <a href="#" target="_blank">github.com/wolvxbeso-sys</a></li>
-            </ul>
+            <div class="social-links" style="margin-top: 30px;">
+                <a href="#" title="ملفي على GitHub"><i class="fab fa-github"></i></a>
+                <a href="#" title="ملفي على LinkedIn"><i class="fab fa-linkedin"></i></a>
+                <a href="#" title="ملفي على تويتر/X"><i class="fab fa-twitter"></i></a>
+            </div>
         </div>
     </section>
 
     <footer>
         <div class="container">
-            <p>&copy; 2023 احمد السيد. جميع الحقوق محفوظة.</p>
+            <p>تم التصميم والتطوير بواسطة **أحمد السيد** © 2025</p>
         </div>
     </footer>
+
 </body>
-
 </html>
-

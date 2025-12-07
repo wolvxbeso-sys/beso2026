@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>عرض حي: نظام أرشفة رقمي</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary-color: #6f42c1; /* لون بنفسجي للأرشفة والبيانات */
+            --accent-color: #17a2b8;
+            --bg-light: #f8f9fa;
+            --text-dark: #343a40;
+            --text-light: #6c757d;
+        }
+
+        body {
+            font-family: 'Cairo', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            text-align: right;
+            line-height: 1.6;
+        }
+
+        .archive-header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 20px 30px;
+        }
+        .archive-header h1 {
+            font-size: 2rem;
+            margin: 0;
+            display: inline-block;
+        }
+
+        .main-content {
+            display: flex;
+            max-width: 1200px;
+            margin: 30px auto;
+            gap: 20px;
+            padding: 0 20px;
+        }
+
+        /* القائمة الجانبية */
+        .sidebar {
+            width: 250px;
+            background-color: white;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            flex-shrink: 0;
+        }
+        .sidebar a {
+            display: block;
+            padding: 12px 10px;
+            margin-bottom: 5px;
+            text-decoration: none;
+            color: var(--text-dark);
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+        .sidebar a:hover, .sidebar a.active {
+            background-color: var(--bg-light);
+            color: var(--primary-color);
+            font-weight: bold;
+        }
+        .sidebar a i {
+            margin-left: 10px;
+            color: var(--primary-color);
+        }
+
+        /* منطقة الأرشيف الرئيسية */
+        .archive-area {
+            flex-grow: 1;
+        }
+        .search-box {
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+        }
+        .search-box input {
+            flex-grow: 1;
+            padding: 10px;
+            border: 1px solid var(--border-color);
+            border-radius: 5px;
+            margin-left: 10px;
+            font-family: 'Cairo', sans-serif;
+        }
+        .search-box button {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        /* قائمة الوثائق */
+        .document-list {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+        .document-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+            border-bottom: 1px dashed var(--bg-light);
+        }
+        .document-item:last-child {
+            border-bottom: none;
+        }
+        .doc-info span {
+            display: block;
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+        .doc-actions a {
+            color: var(--accent-color);
+            margin-left: 15px;
+            text-decoration: none;
+            font-size: 1.1rem;
+        }
+
+        .back-to-details {
+            text-align: center;
+            margin: 40px 0;
+        }
+        .back-to-details a {
+            display: inline-flex;
+            align-items: center;
+            background-color: var(--text-dark);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+        .back-to-details a:hover {
+            background-color: #495057;
+        }
+        .back-to-details a i {
+            margin-left: 8px;
+        }
+
+        @media (max-width: 768px) {
+            .main-content {
+                flex-direction: column;
+            }
+            .sidebar {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="archive-header">
+        <h1><i class="fas fa-database"></i> نظام التوثيق والأرشفة</h1>
+    </div>
+
+    <div class="main-content">
+        <div class="sidebar">
+            <a href="#" class="active"><i class="fas fa-folder-open"></i> وثائق العقود</a>
+            <a href="#"><i class="fas fa-file-invoice"></i> السجلات المالية</a>
+            <a href="#"><i class="fas fa-users"></i> ملفات الموظفين</a>
+            <a href="#"><i class="fas fa-cog"></i> الإعدادات</a>
+            <a href="#"><i class="fas fa-user-lock"></i> سجل النشاط (Audit Log)</a>
+        </div>
+
+        <div class="archive-area">
+            <div class="search-box">
+                <button><i class="fas fa-search"></i> بحث</button>
+                <input type="text" placeholder="البحث برقم الوثيقة أو الكلمات المفتاحية..." dir="rtl">
+            </div>
+
+            <div class="document-list">
+                <h2>وثائق العقود الحديثة</h2>
+                
+                <div class="document-item">
+                    <div class="doc-info">
+                        **عقد المورد رقم 2024-55**
+                        <span><i class="fas fa-calendar-alt"></i> تاريخ الإيداع: 2025/01/10 | <i class="fas fa-tag"></i> تصنيف: سري</span>
+                    </div>
+                    <div class="doc-actions">
+                        <a href="#" title="عرض"><i class="fas fa-eye"></i></a>
+                        <a href="#" title="تحميل"><i class="fas fa-download"></i></a>
+                    </div>
+                </div>
+
+                <div class="document-item">
+                    <div class="doc-info">
+                        **اتفاقية الشراكة الجديدة**
+                        <span><i class="fas fa-calendar-alt"></i> تاريخ الإيداع: 2025/01/05 | <i class="fas fa-tag"></i> تصنيف: عام</span>
+                    </div>
+                    <div class="doc-actions">
+                        <a href="#" title="عرض"><i class="fas fa-eye"></i></a>
+                        <a href="#" title="تحميل"><i class="fas fa-download"></i></a>
+                    </div>
+                </div>
+
+                <div class="document-item">
+                    <div class="doc-info">
+                        **مذكرة تفويض إداري**
+                        <span><i class="fas fa-calendar-alt"></i> تاريخ الإيداع: 2024/12/28 | <i class="fas fa-tag"></i> تصنيف: داخلي</span>
+                    </div>
+                    <div class="doc-actions">
+                        <a href="#" title="عرض"><i class="fas fa-eye"></i></a>
+                        <a href="#" title="تحميل"><i class="fas fa-download"></i></a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="back-to-details">
+        <a href="archive_details.html"><i class="fas fa-arrow-right"></i> العودة لصفحة تفاصيل المشروع</a>
+    </div>
+
+</body>
+</html>
